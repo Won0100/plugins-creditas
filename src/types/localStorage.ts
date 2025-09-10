@@ -1,0 +1,11 @@
+export type LocalStorageItemType = 
+    'ATHAN_USER_CRM_DATA' | 
+    'ATHAN_AUTH_CRM_DATA' | 
+    'ATHAN_DIALER_LOCATION' |
+    'ATHAN_USER_CRM_TOKEN' |
+    'ATHAN_TENANT_CRM_DATA' |
+    'ATHAN_TENANT_DIALER_DATA' |
+    'ACTIVITY_PANEL' |
+    'TEAMS' |
+    'AREAS' |
+    'FLEX_SDK_CACHE_FEATURES_CONFIG'

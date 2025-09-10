@@ -1,0 +1,33 @@
+on:
+  push:
+    branches:
+      - 'master'
+
+name: Slack Notification
+jobs:
+  slackNotification:
+    name: Slack Notification
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: kceb/pull-request-url-action@v1
+      id: pr-url
+    - name: Add SHORT_SHA env property with commit short sha
+      shell: bash
+      id: vars
+      run: |
+        echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+    # https://github.com/marketplace/actions/slack-notify
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_USERNAME: "Github"
+        MSG_MINIMAL: ","
+        SLACK_LINK_NAMES: true
+        SLACK_FOOTER: ""
+        SLACK_TITLE: ${{github.repository}}
+        SLACK_MESSAGE: |
+          *Message:* ${{ github.event.head_commit.message }}
+          *Commit:* <https://github.com/${{github.repository}}/commit/${{ github.sha }}|${{ steps.vars.outputs.sha_short }}>
+          ${{ steps.pr-url.outputs.url }}
+        SLACK_WEBHOOK: ${{ secrets.INSURANCE_DEPLOY_WEBHOOK_NOTIFY }}

@@ -1,0 +1,36 @@
+{
+  "name": "flex-core-plugin-creditas",
+  "version": "1.0.38",
+  "private": true,
+  "scripts": {
+    "postinstall": "flex-plugin pre-script-check"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.1.5",
+    "@emotion/styled": "^11.1.5",
+    "@mui/icons-material": "5.15.19",
+    "@mui/lab": "^5.0.0-alpha.170",
+    "@mui/material": "5.15.19",
+    "@twilio/flex-plugin-scripts": "7.0.0",
+    "apexcharts": "^3.49.1",
+    "audio-react-recorder": "^1.0.5",
+    "jspdf": "^3.0.1",
+    "jspdf-autotable": "^5.0.2",
+    "lamejs": "zhuker/lamejs",
+    "libphonenumber-js": "^1.12.6",
+    "moment-timezone": "^0.5.45",
+    "prop-types": "15.7.2",
+    "react": "17.0.2",
+    "react-apexcharts": "^1.4.1",
+    "react-dom": "17.0.2",
+    "twilio-sync": "^3.3.3",
+    "url-loader": "^4.1.1",
+    "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "@twilio/flex-ui": "^2.12.0",
+    "@types/uuid": "^10.0.0",
+    "react-test-renderer": "17.0.2",
+    "typescript": "4"
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "Padrão": {
+    "Almoço": {
+      "bgColor": "#E68F56",
+      "color": "#FFFFFF",
+      "dailyUsageLimit": 0,
+      "maxTime": 0,
+      "minTime": 0
+    },
+    "Almoço Sábado": {
+      "bgColor": "#E68F56",
+      "color": "#FFFFFF",
+      "dailyUsageLimit": 0,
+      "maxTime": 0,
+      "minTime": 0
+    },
+    "Banheiro": {
+      "bgColor": "#E68F56",
+      "color": "#FFFFFF",
+      "dailyUsageLimit": 0,
+      "maxTime": 0,
+      "minTime": 0
+    },
+    "Bloqueio Agenda": {
+      "bgColor": "#FF5247",
+      "color": "#FFFFFF",
+      "dailyUsageLimit": 0,
+      "maxTime": 0,
+      "minTime": 0
+    },
+    "Café": {
+      "bgColor": "#FFFFFF",
+      "color": "#000000",
+      "dailyUsageLimit": 0,
+      "maxTime": 0,
+      "minTime": 0
+    },
+    "Deslogado": {
+      "bgColor": "#808080",
+      "color": "#FFFFFF",
+      "dailyUsageLimit": 0,
+      "maxTime": 0,
+      "minTime": 0
+    },
+    "Disponível": {
+      "bgColor": "#04C223",
+      "color": "#FFFFFF",
+      "dailyUsageLimit": 0,
+      "maxTime": 0,
+      "minTime": 0
+    },
+    "Em Atendimento": {
+      "bgColor": "#4067A3",
+      "color": "#FFFFFF",
+      "dailyUsageLimit": 0,
+      "maxTime": 0,
+      "minTime": 0
+    },
+    "Feedback": {
+      "bgColor": "#E68F56",
+      "color": "#FFFFFF",
+      "dailyUsageLimit": 0,
+      "maxTime": 0,
+      "minTime": 0
+    },
+    "Follow-Up": {
+      "bgColor": "#FFFFFF",
+      "color": "#000000",
+      "dailyUsageLimit": 0,
+      "maxTime": 0,
+      "minTime": 0
+    },
+    "Indisponível": {
+      "bgColor": "#FF0000",
+      "color": "#FFFFFF",
+      "dailyUsageLimit": 0,
+      "maxTime": 0,
+      "minTime": 0
+    },
+    "Lideres": {
+      "bgColor": "#FFFFFF",
+      "color": "#000000",
+      "dailyUsageLimit": 0,
+      "maxTime": 0,
+      "minTime": 0
+    },
+    "Ligação OGM": {
+      "bgColor": "#FFFFFF",
+      "color": "#000000",
+      "dailyUsageLimit": 0,
+      "maxTime": 0,
+      "minTime": 0
+    },
+    "Pausa 10": {
+      "bgColor": "#FFFFFF",
+      "color": "#000000",
+      "dailyUsageLimit": 0,
+      "maxTime": 0,
+      "minTime": 0
+    },
+    "Pausa Login": {
+      "bgColor": "#FFFFFF",
+      "color": "#000000",
+      "dailyUsageLimit": 0,
+      "maxTime": 0,
+      "minTime": 0
+    },
+    "Pausa Pós Atendimento": {
+      "bgColor": "#FF0000",
+      "color": "#FFFFFF",
+      "dailyUsageLimit": 0,
+      "maxTime": 0,
+      "minTime": 0
+    },
+    "Problemas Técnicos": {
+      "bgColor": "#FFFFFF",
+      "color": "#000000",
+      "dailyUsageLimit": 0,
+      "maxTime": 0,
+      "minTime": 0
+    },
+    "Retorno de Ligacao": {
+      "bgColor": "#89B4FF",
+      "color": "#FFFFFF",
+      "dailyUsageLimit": 0,
+      "maxTime": 0,
+      "minTime": 0
+    },
+    "Reunião": {
+      "bgColor": "#E68F56",
+      "color": "#FFFFFF",
+      "dailyUsageLimit": 0,
+      "maxTime": 0,
+      "minTime": 0
+    },
+    "Treinamento": {
+      "bgColor": "#E68F56",
+      "color": "#FFFFFF",
+      "dailyUsageLimit": 0,
+      "maxTime": 0,
+      "minTime": 0
+    }
+  }
+}

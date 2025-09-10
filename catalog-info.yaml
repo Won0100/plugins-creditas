@@ -1,0 +1,42 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "insurance-twilio-flex-plugins"
+  description: "insurance-twilio-flex-plugins"
+  labels:
+    creditas.io/tribe: insurance
+    creditas.io/language: unknown
+  annotations:
+    # https://backstage.io/docs/features/software-catalog/well-known-annotations#githubcomproject-slug
+    github.com/project-slug: Creditas/insurance-twilio-flex-plugins
+
+    # Uncomment this line to classify the type of exposure for this service
+    # ENUM: [internal, external]
+    creditas.io/expose-type: internal
+
+    creditas.io/tribe: tribe-insurance
+    creditas.io/squad: unknow
+    creditas.io/language: CSharp
+    creditas.io/impact: low
+
+  tags:
+    - service
+
+  # Uncomment the line to reference some quick access links, such as metrics dashboard
+  # links:
+  #   - url: https://developerhub.creditas.io
+  #     title: Developer hub
+  #     icon: dashboard
+spec:
+  # https://backstage.io/docs/features/software-catalog/descriptor-format#spectype-required
+  # ENUM:[service, website, library, documentation]
+  type: service
+
+  # https://backstage.io/docs/features/software-catalog/descriptor-format#speclifecycle-required
+  # ENUM: [experimental, production, deprecated]
+  lifecycle: experimental
+
+  # https://backstage.io/docs/features/software-catalog/descriptor-format#specowner-required
+  # Github Team Name: Name of responsible team
+  # When it is a single person: user:username
+  owner: tribe-insurance

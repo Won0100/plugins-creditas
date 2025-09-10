@@ -1,0 +1,25 @@
+{
+  "request_id": "RQ9e8cc0cce44802fd1d0139d4dd4c7b44",
+  "api_compatibility": [],
+  "version_compatibility": [
+    {
+      "file": "/insurance-twilio-flex-plugins/package.json",
+      "warnings": []
+    }
+  ],
+  "dom_manipulation": [
+    {
+      "file": "/insurance-twilio-flex-plugins/src/helpers/onStartOutboundCall.ts",
+      "messages": [
+        "WARNING: Usage of `document.querySelector(\n  \"#caller-id-select-outbound-call input\"\n)` is discourged.",
+        "WARNING: Usage of `document.querySelector(\n  \"#queue-select-outbound-call input\"\n)` is discourged."
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "file": "/insurance-twilio-flex-plugins/src/services/supervisorBargeCoach/sync.ts",
+      "message": "Unexpected token (13:8)"
+    }
+  ]
+}
