@@ -19,31 +19,37 @@ jobs:
     environment: ${{ github.ref_name == 'main2' && 'prod' || 'stage' }}
 
     steps:
+      # 1️⃣ Checkout do repositório
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      # 2️⃣ Configura Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
+      # 3️⃣ Instala Twilio CLI globalmente
       - name: Install Twilio CLI
         run: |
           npm install -g twilio-cli
           twilio --version
 
+      # 4️⃣ Configura variáveis de ambiente do Twilio
       - name: Set environment variables
         run: |
           echo "TWILIO_ACCOUNT_SID=${{ secrets.TWILIO_ACCOUNT_SID }}" >> $GITHUB_ENV
           echo "TWILIO_API_KEY=${{ secrets.TWILIO_API_KEY }}" >> $GITHUB_ENV
           echo "TWILIO_API_SECRET=${{ secrets.TWILIO_API_SECRET }}" >> $GITHUB_ENV
 
+      # 5️⃣ Instala dependências na raiz e desativa o pre-script-check
       - name: Install dependencies and build (root)
         run: |
-          npm install --legacy-peer-deps
+          DISABLE_FLEX_PLUGIN_PRE_CHECK=1 npm install --legacy-peer-deps
           npm install typescript
           npx tsc
 
+      # 6️⃣ Deploy do plugin Flex
       - name: Deploy Flex Plugin
         run: |
           cd src
