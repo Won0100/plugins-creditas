@@ -45,7 +45,7 @@ jobs:
 
       - name: Install dependencies and build (root)
         run: |
-          DISABLE_FLEX_PLUGIN_PRE_CHECK=1 npm install --legacy-peer-deps --force
+          DISABLE_FLEX_PLUGIN_PRE_CHECK=1 npm install --legacy-peer-deps
           npm install typescript
           npx tsc
         env:

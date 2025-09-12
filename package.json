@@ -32,5 +32,13 @@
     "@types/uuid": "^10.0.0",
     "react-test-renderer": "17.0.2",
     "typescript": "4"
+  },
+  "overrides": {
+    "audio-react-recorder": {
+      "react": "^17.0.2"
+    },
+    "airbnb-prop-types": {
+      "react": "^17.0.2"
+    }
   }
 }
