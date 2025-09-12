@@ -45,10 +45,11 @@ jobs:
 
       - name: Install dependencies and build (root)
         run: |
-          npm install --legacy-peer-deps --force
+          DISABLE_FLEX_PLUGIN_PRE_CHECK=1 npm install --legacy-peer-deps --force
           npm install typescript
           npx tsc
-
+        env:
+          DISABLE_FLEX_PLUGIN_PRE_CHECK: 1
       - name: Deploy Flex Plugin
         run: |
           cd src
