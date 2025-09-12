@@ -6,7 +6,7 @@ import { Reservation } from "twilio-taskrouter/dist/types";
 import { LocalStorageItemType } from "../helpers/localStorage/LocalStorageItemType";
 
 const workerClient = userInstance.getWorkerClient();
-console.log('teste pipeline2')
+console.log('teste pipeline3')
 export const invokeAction = {
     navigateToView: async (viewName: string) => {
         await Actions.invokeAction('NavigateToView', { viewName })

@@ -8,31 +8,34 @@ on:
     paths:
       - "src/**"
 
+permissions:
+  id-token: write      # necessário para OIDC
+  contents: read       # necessário para checkout
+
 jobs:
   deploy_plugin:
     runs-on: ubuntu-latest
 
+    # Ambiente baseado na branch
     environment: ${{ github.ref_name == 'main2' && 'prod' || 'stage' }}
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Configure AWS credentials via OIDC
+      # Configura credenciais AWS via OIDC
+      - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::574711947146:role/Bitbucket-S3-Deploy
           aws-region: us-east-2
-          role-session-name: github-actions
 
+      # Login no Amazon ECR
       - name: Login to Amazon ECR
-        id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Pull custom Docker image
-        run: docker pull 574711947146.dkr.ecr.us-east-2.amazonaws.com/wittel-dev-images:1.0.0
-
-      - name: Run deployment inside container
+      # Rodar steps dentro do container
+      - name: Deploy inside custom image
         run: |
           docker run --rm \
             -e TWILIO_ACCOUNT_SID=${{ secrets.TWILIO_ACCOUNT_SID }} \
@@ -42,15 +45,16 @@ jobs:
             -w /workspace \
             574711947146.dkr.ecr.us-east-2.amazonaws.com/wittel-dev-images:1.0.0 \
             bash -c "
-              npm install &&
-              export TWILIO_ACCOUNT_SID=${{ secrets.TWILIO_ACCOUNT_SID }} &&
-              export TWILIO_API_KEY=${{ secrets.TWILIO_API_KEY }} &&
-              export TWILIO_API_SECRET=${{ secrets.TWILIO_API_SECRET }} &&
-              bash ../scripts/create_env.sh .env.template &&
-              message=\$(git log -1 --format=%h --abbrev=40) &&
-              twilio flex:plugins:deploy --changelog=\"\$message\" --bypass-validation &&
-              plugin_name=\$(node -p -e \"require('./package.json').name\") &&
-              twilio flex:plugins:list:plugin-versions --name \$plugin_name --json > plugin-versions.json &&
-              plugin_version=\$(node -p -e \"require('./plugin-versions.json')[0].version\") &&
-              twilio flex:plugins:release --plugin \$plugin_name@\$plugin_version --name \"\$plugin_name@\$plugin_version\" --description \"\$message (\${GITHUB_ENVIRONMENT})\"
+              cd plugin-flex-ts-template-v2
+              npm install
+              bash ../scripts/create_env.sh .env.template
+              message=\$(git log -1 --format=%h --abbrev=40)
+              twilio flex:plugins:deploy --changelog=\"\$message\" --bypass-validation
+              plugin_name=\$(node -p -e \"require('./package.json').name\")
+              twilio flex:plugins:list:plugin-versions --name \${plugin_name} --json > plugin-versions.json
+              plugin_version=\$(node -p -e \"require('./plugin-versions.json')[0].version\")
+              twilio flex:plugins:release \
+                --plugin \${plugin_name}@\${plugin_version} \
+                --name \"\${plugin_name}@\${plugin_version}\" \
+                --description \"\$message\"
             "
