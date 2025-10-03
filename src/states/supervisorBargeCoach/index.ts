@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import { reduce as BargeCoachReducer } from './BargeCoachState';
+import { reducer as BargeCoachReducer } from './BargeCoachState';
 
 export const namespace = 'barge-coach';
 
