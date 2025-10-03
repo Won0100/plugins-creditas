@@ -1,7 +1,7 @@
 import { Reducer, AnyAction } from "redux";
 import { SupervisorData } from "../../types/supervisorBargeCoach/supervisorData";
 
-const ACTION_SET_BARGE_COACH_STATUS = 'SET_BARGE_COACH_STATUS';
+const ACTION_SET_BARGE_COACH_STATUS = "SET_BARGE_COACH_STATUS";
 
 export type BargeCoachStatus = {
   coaching: boolean;
@@ -9,7 +9,7 @@ export type BargeCoachStatus = {
   muted: boolean;
   barge: boolean;
   enableBargeinButton: boolean;
-  supervisorArray: SupervisorData[],
+  supervisorArray: SupervisorData[];
   coachingStatusPanel: boolean;
   mutingLoading?: boolean;
   bargingLoading?: boolean;
@@ -26,28 +26,12 @@ export const initialState: BargeCoachStatus = {
   coachingStatusPanel: true,
 };
 
-export type BargeCoachAction = 
-  | { type: typeof ACTION_SET_BARGE_COACH_STATUS; status: Partial<BargeCoachStatus> };
-
-export class Actions {
-  static setBargeCoachStatus = (status: Partial<BargeCoachStatus>) => ({ type: ACTION_SET_BARGE_COACH_STATUS, status });
-
-  static resetBargeCoachStatus = () => ({
-    type: ACTION_SET_BARGE_COACH_STATUS,
-    status: { ...initialState },
-  });
-}
-
-export const reduce: Reducer<BargeCoachStatus, AnyAction> = function (state = initialState, action: AnyAction) {
-  switch (action.type) {
-    case ACTION_SET_BARGE_COACH_STATUS: {
-      return {
-        ...state,
-        ...action.status,
-      };
-    }
-    
-    default:
-      return state;
+export const reduce: Reducer<BargeCoachStatus, AnyAction> = (
+  state = initialState,
+  action
+) => {
+  if (action.type === ACTION_SET_BARGE_COACH_STATUS && "status" in action) {
+    return { ...state, ...action.status };
   }
-}
+  return state;
+};
