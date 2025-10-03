@@ -3,20 +3,11 @@ import { ActivityColorType } from '../../types/activities';
 
 export const initialState: ActivityColorType = {};
 
-export type ActionType = {
-  type: 'SET_DATA_ACTIVITIES_FLAG_COLOR',
-  payload: ActivityColorType;
-}
-
-export const reducer: Reducer<ActivityColorType, AnyAction> = (state = initialState, action: AnyAction) => {
+export const activitiesFlagColorReducer: Reducer<ActivityColorType> = (state = initialState, action: AnyAction) => {
   switch(action.type) {
-    case 'SET_DATA_ACTIVITIES_FLAG_COLOR': {
-      if(action?.payload) {
-        return action.payload;
-      }
-      return state;
-    }
+    case 'SET_DATA_ACTIVITIES_FLAG_COLOR':
+      return action.payload || state;
     default:
       return state;
-  }  
+  }
 };

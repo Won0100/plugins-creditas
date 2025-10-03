@@ -1,7 +1,7 @@
 import { Reducer, AnyAction } from "redux";
 import { SupervisorData } from "../../types/supervisorBargeCoach/supervisorData";
 
-const ACTION_SET_BARGE_COACH_STATUS = 'SET_BARGE_COACH_STATUS';
+export const ACTION_SET_BARGE_COACH_STATUS = 'SET_BARGE_COACH_STATUS';
 
 export type BargeCoachStatus = {
   coaching: boolean;
@@ -26,26 +26,10 @@ export const initialState: BargeCoachStatus = {
   coachingStatusPanel: true,
 };
 
-// Restaurando Actions
-export const Actions = {
-  setBargeCoachStatus: (status: Partial<BargeCoachStatus>) => ({
-    type: ACTION_SET_BARGE_COACH_STATUS,
-    status
-  }),
-  resetBargeCoachStatus: () => ({
-    type: ACTION_SET_BARGE_COACH_STATUS,
-    status: { ...initialState }
-  })
-};
-
-export type BargeCoachAction = 
-  | { type: typeof ACTION_SET_BARGE_COACH_STATUS; status: Partial<BargeCoachStatus> };
-
-export const reduce: Reducer<BargeCoachStatus, AnyAction> = (state = initialState, action: AnyAction) => {
+export const supervisorBargeCoachReducer: Reducer<BargeCoachStatus> = (state = initialState, action: AnyAction) => {
   switch(action.type) {
-    case ACTION_SET_BARGE_COACH_STATUS: {
+    case ACTION_SET_BARGE_COACH_STATUS:
       return { ...state, ...action.status };
-    }
     default:
       return state;
   }
