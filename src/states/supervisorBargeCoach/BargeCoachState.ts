@@ -1,36 +1,48 @@
-import { Reducer, AnyAction } from "redux";
-import { SupervisorData } from "../../types/supervisorBargeCoach/supervisorData";
+import { Reducer } from "redux";
 
-export const ACTION_SET_BARGE_COACH_STATUS = 'SET_BARGE_COACH_STATUS';
-
-export type BargeCoachStatus = {
+export interface BargeCoachState {
+  monitoring: boolean;
   coaching: boolean;
-  enableCoachButton: boolean;
-  muted: boolean;
-  barge: boolean;
-  enableBargeinButton: boolean;
-  supervisorArray: SupervisorData[];
-  coachingStatusPanel: boolean;
-  mutingLoading?: boolean;
-  bargingLoading?: boolean;
-  coachingLoading?: boolean;
-};
+  privateMode: boolean;
+}
 
-export const initialState: BargeCoachStatus = {
+export type BargeCoachActions =
+  | { type: "START_MONITORING" }
+  | { type: "STOP_MONITORING" }
+  | { type: "START_COACHING" }
+  | { type: "STOP_COACHING" }
+  | { type: "ENABLE_PRIVATE_MODE" }
+  | { type: "DISABLE_PRIVATE_MODE" }
+  | { type: "RESET" };
+
+const initialState: BargeCoachState = {
+  monitoring: false,
   coaching: false,
-  enableCoachButton: false,
-  muted: true,
-  barge: false,
-  enableBargeinButton: false,
-  supervisorArray: [],
-  coachingStatusPanel: true,
+  privateMode: false,
 };
 
-export const supervisorBargeCoachReducer: Reducer<BargeCoachStatus> = (state = initialState, action: AnyAction) => {
-  switch(action.type) {
-    case ACTION_SET_BARGE_COACH_STATUS:
-      return { ...state, ...action.status };
+export const reducer: Reducer<BargeCoachState, BargeCoachActions> = (
+  state = initialState,
+  action
+) => {
+  switch (action.type) {
+    case "START_MONITORING":
+      return { ...state, monitoring: true };
+    case "STOP_MONITORING":
+      return { ...state, monitoring: false };
+    case "START_COACHING":
+      return { ...state, coaching: true };
+    case "STOP_COACHING":
+      return { ...state, coaching: false };
+    case "ENABLE_PRIVATE_MODE":
+      return { ...state, privateMode: true };
+    case "DISABLE_PRIVATE_MODE":
+      return { ...state, privateMode: false };
+    case "RESET":
+      return initialState;
     default:
       return state;
   }
 };
+
+export type Actions = BargeCoachActions;

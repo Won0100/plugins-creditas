@@ -1,13 +1,35 @@
-import { Reducer, AnyAction } from "redux";
-import { ActivityColorType } from '../../types/activities';
+import { Reducer } from "redux";
 
-export const initialState: ActivityColorType = {};
+export interface ActivitiesFlagColorState {
+  colorFlags: Record<string, string>; // exemplo de mapeamento por activitySid
+}
 
-export const activitiesFlagColorReducer: Reducer<ActivityColorType> = (state = initialState, action: AnyAction) => {
-  switch(action.type) {
-    case 'SET_DATA_ACTIVITIES_FLAG_COLOR':
-      return action.payload || state;
+export type ActivitiesFlagColorActions =
+  | { type: "SET_ACTIVITY_COLOR"; payload: { activitySid: string; color: string } }
+  | { type: "RESET_ACTIVITY_COLORS" };
+
+const initialState: ActivitiesFlagColorState = {
+  colorFlags: {},
+};
+
+export const reducer: Reducer<ActivitiesFlagColorState, ActivitiesFlagColorActions> = (
+  state = initialState,
+  action
+) => {
+  switch (action.type) {
+    case "SET_ACTIVITY_COLOR":
+      return {
+        ...state,
+        colorFlags: {
+          ...state.colorFlags,
+          [action.payload.activitySid]: action.payload.color,
+        },
+      };
+    case "RESET_ACTIVITY_COLORS":
+      return initialState;
     default:
       return state;
   }
 };
+
+export type Actions = ActivitiesFlagColorActions;

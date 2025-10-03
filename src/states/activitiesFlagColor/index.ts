@@ -1,8 +1,3 @@
-import { combineReducers } from 'redux';
-import { reducer as ActivitiesFlagColorReducer } from './ActivitiesFlagColor';
-
-export const namespace = 'activities-flag-color';
-
-export const activitiesFlagColorReducer = combineReducers({
-  activitiesFlagColor: ActivitiesFlagColorReducer,
-});
+export { reducer } from "./ActivitiesFlagColor";
+export type { Actions } from "./ActivitiesFlagColor";
+export const namespace = "activitiesFlagColor";
