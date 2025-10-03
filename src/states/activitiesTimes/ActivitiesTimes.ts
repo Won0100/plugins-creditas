@@ -11,7 +11,7 @@ export type ActionType = {
   payload: string
 }  
 
-export const reducer: Reducer<ActivitiesTimes, ActionType> = (state = initialState, action) => {
+export const reducer: Reducer<ActivitiesTimes, AnyAction> = (state = initialState, action: AnyAction) => {
   switch(action.type) {
       case 'UPDATE_LAST_ACTIVITY': {
         return {

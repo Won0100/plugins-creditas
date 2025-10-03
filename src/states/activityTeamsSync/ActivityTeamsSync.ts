@@ -8,7 +8,7 @@ export type ActionType = {
   payload: TeamsActivitiesDataType[]
 }  
 
-export const reducer: Reducer<TeamsActivitiesDataType[], ActionType> = (state = initialState, action) => {
+export const reducer: Reducer<TeamsActivitiesDataType[], AnyAction> = (state = initialState, action: AnyAction) => {
   switch(action.type) {
       case 'SET_DATA_TEAMS_ACTIVITIES': {
         if(action?.payload) {
