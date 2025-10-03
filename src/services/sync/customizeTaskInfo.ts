@@ -6,7 +6,7 @@ import { Manager } from '@twilio/flex-ui';
 const manager = Manager.getInstance();
 const uniqueName = `customize-task-info-${manager.serviceConfiguration.account_sid}`;
 const url = `https://sync.twilio.com/v1/Services/${manager.serviceConfiguration.attributes?.sync_service_sid || process.env.FLEX_APP_SYNC_SERVICE_SID}/Documents`;
-
+console.debug('url:: ', url)
 interface DocumentDataType extends ServiceSyncType {
     data: CustomizeTaskInfoType;
 }

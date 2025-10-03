@@ -8,7 +8,7 @@ export type ActionType = {
   payload: ActivityColorType;
 }  
 
-export const reducer: Reducer<ActivityColorType, ActionType> = (state = initialState, action: AnyAction) => {
+export const reducer: Reducer<ActivityColorType, ActionType> = (state = initialState, action) => {
   switch(action.type) {
       case 'SET_DATA_ACTIVITIES_FLAG_COLOR': {
         if(action?.payload) {

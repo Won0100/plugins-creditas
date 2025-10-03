@@ -14,7 +14,7 @@ export type ActionType = {
   payload: CopilotIAState;
 }
 
-export const reducer: Reducer<CopilotIAState, ActionType> = (state = initialState, action: AnyAction) => {
+export const reducer: Reducer<CopilotIAState, ActionType> = (state = initialState, action) => {
   switch(action.type) {
     case 'SET_COPILOT_IA_MESSAGE': {
       if(action?.payload) {

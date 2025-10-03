@@ -4,6 +4,7 @@ import { supervisorBargeCoachReducer, namespace as supervisorBargeCoachNamespace
 import { activitiesFlagColorReducer, namespace as activitiesFlagColorNamespace } from './activitiesFlagColor';
 import { activitiesTimesReducer, namespace as activitiesTimesReducerNamespace} from "./activitiesTimes";
 import { copilotIAReducer, namespace as copilotIANamespace } from "./copilotIA";
+import { supervisorTaskInfoPanelReducer, namespace as supervisorTaskInfoPanelNamespace } from "./supervisorTaskInfoPanel";
 
 const reducersToRegister = {
     [supervisorBargeCoachNamespace]: supervisorBargeCoachReducer,
@@ -11,6 +12,7 @@ const reducersToRegister = {
     [activitiesFlagColorNamespace]: activitiesFlagColorReducer,
     [activitiesTimesReducerNamespace]: activitiesTimesReducer,
     [copilotIANamespace]: copilotIAReducer,
+    [supervisorTaskInfoPanelNamespace]: supervisorTaskInfoPanelReducer
 }
 
 export const registerReducers = () => {

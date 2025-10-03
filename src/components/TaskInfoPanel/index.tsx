@@ -7,11 +7,22 @@ import { defaultData } from "../../helpers/customizeTaskInfo/defaultData";
 import { CustomizeTaskInfoType } from "../../types/customizeTaskInfo";
 import { object } from "../../helpers/object";
 import { Text } from "./styled";
+import { useSelector } from "react-redux";
 
-export const TaskInfoPanel: FC<TaskInfoPanelProps> = (props) => {
+export const TaskInfoPanel: FC<TaskInfoPanelProps> = (props: any) => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<CustomizeTaskInfoType>(defaultData);
-
+  console.debug('props:: ', props)
+  //acessa o state do flex
+  const flexState = useSelector((state: any) => state.flex);
+  console.debug('flexState:: ', flexState)
+  //acessa a task de dentro da lista de tasks do state de acordo com o sid da reservation
+  const taskState = flexState.worker.tasks.get(props.task.sid) ? flexState.worker.tasks.get(props.task.sid) : props.task
+  console.debug('taskState:: ', taskState)
+  //determina se o componente esta sendo renderizado na tela do agente ou na tela do supervisor
+  const task = props.task._source ? taskState : props.task
+  console.debug('valida tela:: ', props.task._source ? 'tem _source' : 'não tem _source')
+  console.debug('task:: ', task)
   useEffect(() => {
     (async () => {
       setLoading(true);
@@ -32,7 +43,7 @@ export const TaskInfoPanel: FC<TaskInfoPanelProps> = (props) => {
           <MUI.TableBody>
             {props.task &&
               data?.infoTask?.map((item) => {
-                const value = object.getNestedProperty(props, item.value);
+                const value = object.getNestedProperty(task, item.value);
                 const stringValue = value ? value.toString() : "";
                 const isMarkdownLink = stringValue.match(
                   /\[([^\]]+)\]\((https?:\/\/[^\s]+)\)/
@@ -68,7 +79,7 @@ export const TaskInfoPanel: FC<TaskInfoPanelProps> = (props) => {
           <MUI.TableBody>
             {props.task &&
               data?.infoCustomer?.map((item) => {
-                const value = object.getNestedProperty(props, item.value);
+                const value = object.getNestedProperty(task, item.value);
                 const stringValue = value ? value.toString() : "";
                 const isMarkdownLink = stringValue.match(
                   /\[([^\]]+)\]\((https?:\/\/[^\s]+)\)/

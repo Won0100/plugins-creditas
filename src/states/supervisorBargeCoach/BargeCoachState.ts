@@ -38,7 +38,7 @@ export class Actions {
   });
 }
 
-export const reduce: Reducer<BargeCoachStatus, BargeCoachAction> = function (state = initialState, action: AnyAction) {
+export const reduce: Reducer<BargeCoachStatus, BargeCoachAction> = function (state = initialState, action) {
   switch (action.type) {
     case ACTION_SET_BARGE_COACH_STATUS: {
       return {
