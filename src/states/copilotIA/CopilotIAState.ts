@@ -1,33 +1,31 @@
-import { Reducer } from "redux";
+import { AnyAction } from "redux";
 
-export interface CopilotIAState {
-  enabled: boolean;
-  lastResponse?: string;
-}
-
-export type CopilotIAActions =
-  | { type: "SET_ENABLED"; payload: boolean }
-  | { type: "SET_RESPONSE"; payload: string }
-  | { type: "RESET" };
-
-const initialState: CopilotIAState = {
-  enabled: false,
+export type CopilotIAState = {
+  message?: string;
+  author?: string;
+  conversation?: any;
+  task?: any;
 };
 
-export const reducer: Reducer<CopilotIAState, CopilotIAActions> = (
-  state = initialState,
-  action
-) => {
+export const initialState: CopilotIAState = {};
+
+export type ActionType = {
+  type: 'SET_COPILOT_IA_MESSAGE';
+  payload: CopilotIAState;
+};
+
+export const reducer = (
+  state: CopilotIAState = initialState,
+  action: AnyAction
+): CopilotIAState => {
   switch (action.type) {
-    case "SET_ENABLED":
-      return { ...state, enabled: action.payload };
-    case "SET_RESPONSE":
-      return { ...state, lastResponse: action.payload };
-    case "RESET":
-      return initialState;
+    case 'SET_COPILOT_IA_MESSAGE': {
+      if (action && (action as any).payload) {
+        return (action as any).payload;
+      }
+      return state;
+    }
     default:
       return state;
   }
 };
-
-export type Actions = CopilotIAActions;

@@ -1,48 +1,63 @@
-import { Reducer } from "redux";
+import { AnyAction } from "redux";
+import { SupervisorData } from "../../types/supervisorBargeCoach/supervisorData";
 
-export interface BargeCoachState {
-  monitoring: boolean;
+const ACTION_SET_BARGE_COACH_STATUS = 'SET_BARGE_COACH_STATUS';
+
+export type BargeCoachStatus = {
   coaching: boolean;
-  privateMode: boolean;
-}
-
-export type BargeCoachActions =
-  | { type: "START_MONITORING" }
-  | { type: "STOP_MONITORING" }
-  | { type: "START_COACHING" }
-  | { type: "STOP_COACHING" }
-  | { type: "ENABLE_PRIVATE_MODE" }
-  | { type: "DISABLE_PRIVATE_MODE" }
-  | { type: "RESET" };
-
-const initialState: BargeCoachState = {
-  monitoring: false,
-  coaching: false,
-  privateMode: false,
+  enableCoachButton: boolean;
+  muted: boolean;
+  barge: boolean;
+  enableBargeinButton: boolean;
+  supervisorArray: SupervisorData[];
+  coachingStatusPanel: boolean;
+  mutingLoading?: boolean;
+  bargingLoading?: boolean;
+  coachingLoading?: boolean;
 };
 
-export const reducer: Reducer<BargeCoachState, BargeCoachActions> = (
-  state = initialState,
-  action
-) => {
+export const initialState: BargeCoachStatus = {
+  coaching: false,
+  enableCoachButton: false,
+  muted: true,
+  barge: false,
+  enableBargeinButton: false,
+  supervisorArray: [],
+  coachingStatusPanel: true,
+};
+
+export type BargeCoachAction = {
+  type: typeof ACTION_SET_BARGE_COACH_STATUS;
+  status: Partial<BargeCoachStatus>;
+};
+
+// Mantém a exportação Actions que outros arquivos importam
+export class Actions {
+  static setBargeCoachStatus = (status: Partial<BargeCoachStatus>): BargeCoachAction => ({
+    type: ACTION_SET_BARGE_COACH_STATUS,
+    status,
+  });
+
+  static resetBargeCoachStatus = (): BargeCoachAction => ({
+    type: ACTION_SET_BARGE_COACH_STATUS,
+    status: { ...initialState },
+  });
+}
+
+// exporta reducer com assinatura que aceita AnyAction (compatível com Flex addReducer)
+export const reducer = (
+  state: BargeCoachStatus = initialState,
+  action: AnyAction
+): BargeCoachStatus => {
   switch (action.type) {
-    case "START_MONITORING":
-      return { ...state, monitoring: true };
-    case "STOP_MONITORING":
-      return { ...state, monitoring: false };
-    case "START_COACHING":
-      return { ...state, coaching: true };
-    case "STOP_COACHING":
-      return { ...state, coaching: false };
-    case "ENABLE_PRIVATE_MODE":
-      return { ...state, privateMode: true };
-    case "DISABLE_PRIVATE_MODE":
-      return { ...state, privateMode: false };
-    case "RESET":
-      return initialState;
+    case ACTION_SET_BARGE_COACH_STATUS: {
+      // só espalha se existir status
+      if (action && (action as any).status) {
+        return { ...state, ...(action as any).status };
+      }
+      return state;
+    }
     default:
       return state;
   }
 };
-
-export type Actions = BargeCoachActions;

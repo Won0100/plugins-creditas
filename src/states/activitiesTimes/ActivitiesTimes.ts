@@ -1,27 +1,25 @@
-import { Reducer } from "redux";
+import { AnyAction } from "redux";
 
-export interface ActivitiesTimesState {
-  lastActivityChange?: string;
-}
+export type ActivitiesTimes = {
+  lastActivity?: string;
+};
 
-export type ActivitiesTimesActions =
-  | { type: "SET_LAST_ACTIVITY_CHANGE"; payload: string }
-  | { type: "RESET" };
+export const initialState: ActivitiesTimes = {};
 
-const initialState: ActivitiesTimesState = {};
+export type ActionType = {
+  type: 'UPDATE_LAST_ACTIVITY';
+  payload: string;
+};
 
-export const reducer: Reducer<ActivitiesTimesState, ActivitiesTimesActions> = (
-  state = initialState,
-  action
-) => {
+export const reducer = (
+  state: ActivitiesTimes = initialState,
+  action: AnyAction
+): ActivitiesTimes => {
   switch (action.type) {
-    case "SET_LAST_ACTIVITY_CHANGE":
-      return { ...state, lastActivityChange: action.payload };
-    case "RESET":
-      return initialState;
+    case 'UPDATE_LAST_ACTIVITY': {
+      return { lastActivity: (action as any).payload };
+    }
     default:
       return state;
   }
 };
-
-export type Actions = ActivitiesTimesActions;

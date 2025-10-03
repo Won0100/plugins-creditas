@@ -1,29 +1,25 @@
-import { Reducer } from "redux";
+import { AnyAction } from "redux";
+import { TeamsActivitiesDataType } from '../../types/activities';
 
-export interface ActivityTeamsSyncState {
-  synced: boolean;
-}
+export const initialState: TeamsActivitiesDataType[] = [];
 
-export type ActivityTeamsSyncActions =
-  | { type: "SET_SYNCED"; payload: boolean }
-  | { type: "RESET" };
-
-const initialState: ActivityTeamsSyncState = {
-  synced: false,
+export type ActionType = {
+  type: 'SET_DATA_TEAMS_ACTIVITIES';
+  payload: TeamsActivitiesDataType[];
 };
 
-export const reducer: Reducer<ActivityTeamsSyncState, ActivityTeamsSyncActions> = (
-  state = initialState,
-  action
-) => {
+export const reducer = (
+  state: TeamsActivitiesDataType[] = initialState,
+  action: AnyAction
+): TeamsActivitiesDataType[] => {
   switch (action.type) {
-    case "SET_SYNCED":
-      return { ...state, synced: action.payload };
-    case "RESET":
-      return initialState;
+    case 'SET_DATA_TEAMS_ACTIVITIES': {
+      if (action && (action as any).payload) {
+        return (action as any).payload;
+      }
+      return state;
+    }
     default:
       return state;
   }
 };
-
-export type Actions = ActivityTeamsSyncActions;
